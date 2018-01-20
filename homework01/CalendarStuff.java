@@ -227,9 +227,9 @@ public class CalendarStuff {
                     } else {
                         for (long i = 0; i < month1 - 1; i++ ) {
                           if (isLeapYear(year1)) {
-                             dayCount -= leapDays[i - 1L];
+                             dayCount -= leapDays[i - 1];
                           } else {
-                             dayCount -= days[i - 1L];
+                             dayCount -= days[i - 1];
                           } 
                         }
                     }
@@ -241,9 +241,9 @@ public class CalendarStuff {
                     } else {
                         for (long i = 0; i < (month2 - 1); i++ ) {
                           if (isLeapYear(year2)) {
-                             dayCount += leapDays[i - 1L];
+                             dayCount += leapDays[i - 1];
                           } else {
-                             dayCount += days[i - 1L];
+                             dayCount += days[i - 1];
                           }
                         }
                     }
@@ -251,7 +251,7 @@ public class CalendarStuff {
                     dayCount += day2;
 
                     return dayCount;
-          case  0: return dayCount;
+          case  0:  return dayCount;
           case +1:  for (long i = year2; i < year1; i++) {
                       if (isLeapYear(i)) {
                         dayCount += 366;
@@ -262,9 +262,9 @@ public class CalendarStuff {
              
                     for (long i = 0; i < month2; i++ ) {
                       if (isLeapYear(year2)) {
-                        dayCount -= leapDays[i - 1L];
+                        dayCount -= leapDays[i - 1];
                       } else {
-                        dayCount -= days[i - 1L];
+                        dayCount -= days[i - 1];
                       }
                     }
 
@@ -272,9 +272,9 @@ public class CalendarStuff {
 
                     for (long i = 0; i < month1; i++ ) {
                       if (isLeapYear(year1)) {
-                        dayCount += leapDays[i - 1L];
+                        dayCount += leapDays[i - 1];
                       } else {
-                        dayCount += days[i - 1L];
+                        dayCount += days[i - 1];
                       }
                     }
               
