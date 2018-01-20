@@ -56,8 +56,8 @@ public class CalendarStuff {
    *  NOTE: this excludes leap years, so those will be handled as special cases
    *  NOTE: this is optional, but suggested
    */
-   private static final int[]    days        = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-   private static final int[]    leapDays    = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+   private static final long[]    days        = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+   private static final long[]    leapDays    = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
   /**
    * The constructor for the class
@@ -90,8 +90,8 @@ public class CalendarStuff {
    */
    public static long daysInMonth( long month, long year ) {
       int m = (int) month;
-      if ( isLeapYear(year) && month == FEBRUARY ) {
-        return 29;
+      if ( isLeapYear(year) ) {
+        return leapDays[ m - 1];
       } else {
         return days[ m - 1 ];
       }
@@ -161,19 +161,19 @@ public class CalendarStuff {
    * @return         String containing the string value of the month (no spaces)
    */
    public static String toMonthString( int month ) {
-      switch( month - 1 ) {
-         case 0: return "JANUARY";
-         case 1: return "FEBRUARY";
-         case 2: return "MARCH";
-         case 3: return "APRIL";
-         case 4: return "MAY";
-         case 5: return "JUNE";
-         case 6: return "JULY";
-         case 7: return "AUGUST";
-         case 8: return "SEPTEMBER";
-         case 9: return "OCTOBER";
-         case 10: return "NOVEMBER";
-         case 11: return "DECEMBER";
+      switch( month ) {
+         case  1: return "January";
+         case  2: return "February";
+         case  3: return "March";
+         case  4: return "April";
+         case  5: return "May";
+         case  6: return "June";
+         case  7: return "July";
+         case  8: return "August";
+         case  9: return "September";
+         case 10: return "October";
+         case 11: return "November";
+         case 12: return "December";
          default: throw new IllegalArgumentException( "Illegal month value given to 'toMonthString()'." );
       }
    }
@@ -184,9 +184,15 @@ public class CalendarStuff {
    * @return       String containing the string value of the day (no spaces)
    */
    public static String toDayOfWeekString( int day ) {
-      switch( day - 1 ) {
-
-         default       : throw new IllegalArgumentException( "Illegal day value given to 'toDayOfWeekString()'." );
+      switch( day % 7 ) {
+         case  0: return "Saturday";
+         case  1: return "Sunday";
+         case  2: return "Monday";
+         case  3: return "Tuesday";
+         case  4: return "Wednesday";
+         case  5: return "Thursday";
+         case  6: return "Friday";
+         default: throw new IllegalArgumentException( "Illegal day value given to 'toDayOfWeekString()'." );
       }
    }
 
@@ -204,65 +210,77 @@ public class CalendarStuff {
       long dayCount = 0;
       if ( isValidDate (month1, day1, year1) && isValidDate(month2, day2, year2) ) {
         switch( compareDate( month1, day1, year1, month2, day2, year2 ) ){
-          case -1: for (long i = year1; i < year2; i++) {
-                if (isLeapYear(i)) {
-                  dayCount += 366;
-                } else {
-                  dayCount += 365;
-                }
-              }
+          case -1:  if ( year1 == year2 ) {
+                       dayCount += 0;
+                    } else {
+                        for (long i = year1; i < year2; i++) {
+                          if ( isLeapYear(i) ) {
+                             dayCount += 366;
+                          } else {
+                             dayCount += 365;
+                          }
+                        }
+                    }
             
-              for (int i = 0; i < month1; i++ ) {
-               if (isLeapYear(year1)) {
-                  dayCount -= leapDays[i - 1];
-                } else {
-                  dayCount -= days[i - 1];
-                }
-              }
+                    if ( month1 == 1 ) {
+                      dayCount += 0;
+                    } else {
+                        for (long i = 0; i < month1 - 1; i++ ) {
+                          if (isLeapYear(year1)) {
+                             dayCount -= leapDays[i - 1L];
+                          } else {
+                             dayCount -= days[i - 1L];
+                          } 
+                        }
+                    }
 
-              dayCount -= day1;
+                    dayCount -= day1;
 
-              for (int i = 0; i < month2; i++ ) {
-               if (isLeapYear(year2)) {
-                  dayCount += leapDays[i - 1];
-                } else {
-                  dayCount += days[i - 1];
-                }
-              }
+                    if ( month2 == 1 ) {
+                       dayCount += 0;
+                    } else {
+                        for (long i = 0; i < (month2 - 1); i++ ) {
+                          if (isLeapYear(year2)) {
+                             dayCount += leapDays[i - 1L];
+                          } else {
+                             dayCount += days[i - 1L];
+                          }
+                        }
+                    }
               
-              dayCount += day2;
+                    dayCount += day2;
 
-              return dayCount;
+                    return dayCount;
           case  0: return dayCount;
-          case +1: for (long i = year2; i < year1; i++) {
-                if (isLeapYear(i)) {
-                  dayCount += 366;
-                } else {
-                  dayCount += 365;
-                }
-              }
-            
-              for (int i = 0; i < month2; i++ ) {
-               if (isLeapYear(year2)) {
-                  dayCount -= leapDays[i - 1];
-                } else {
-                  dayCount -= days[i - 1];
-                }
-              }
+          case +1:  for (long i = year2; i < year1; i++) {
+                      if (isLeapYear(i)) {
+                        dayCount += 366;
+                      } else {
+                        dayCount += 365;
+                      }
+                    }
+             
+                    for (long i = 0; i < month2; i++ ) {
+                      if (isLeapYear(year2)) {
+                        dayCount -= leapDays[i - 1L];
+                      } else {
+                        dayCount -= days[i - 1L];
+                      }
+                    }
 
-              dayCount -= day2;
+                    dayCount -= day2;
 
-              for (int i = 0; i < month1; i++ ) {
-               if (isLeapYear(year1)) {
-                  dayCount += leapDays[i - 1];
-                } else {
-                  dayCount += days[i - 1];
-                }
-              }
+                    for (long i = 0; i < month1; i++ ) {
+                      if (isLeapYear(year1)) {
+                        dayCount += leapDays[i - 1L];
+                      } else {
+                        dayCount += days[i - 1L];
+                      }
+                    }
               
-              dayCount += day1;
+                     dayCount += day1;
 
-              return dayCount;
+                    return dayCount;
           default: break;
         }
       } 
