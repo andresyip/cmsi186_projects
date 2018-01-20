@@ -213,7 +213,7 @@ public class CalendarStuff {
           case -1:  if ( year1 == year2 ) {
                        dayCount += 0;
                     } else {
-                        for (long i = year1; i < year2; i++) {
+                        for (int i = (int) year1; i < year2; i++) {
                           if ( isLeapYear(i) ) {
                              dayCount += 366;
                           } else {
@@ -225,7 +225,7 @@ public class CalendarStuff {
                     if ( month1 == 1 ) {
                       dayCount += 0;
                     } else {
-                        for (long i = 0; i < month1 - 1; i++ ) {
+                        for (int i = 0; i < month1 - 1; i++ ) {
                           if (isLeapYear(year1)) {
                              dayCount -= leapDays[i - 1];
                           } else {
@@ -239,7 +239,7 @@ public class CalendarStuff {
                     if ( month2 == 1 ) {
                        dayCount += 0;
                     } else {
-                        for (long i = 0; i < (month2 - 1); i++ ) {
+                        for (int i = 0; i < (month2 - 1); i++ ) {
                           if (isLeapYear(year2)) {
                              dayCount += leapDays[i - 1];
                           } else {
@@ -252,7 +252,7 @@ public class CalendarStuff {
 
                     return dayCount;
           case  0:  return dayCount;
-          case +1:  for (long i = year2; i < year1; i++) {
+          case +1:  for (int i = (int) year2; i < year1; i++) {
                       if (isLeapYear(i)) {
                         dayCount += 366;
                       } else {
@@ -260,7 +260,7 @@ public class CalendarStuff {
                       }
                     }
              
-                    for (long i = 0; i < month2; i++ ) {
+                    for (int i = 0; i < month2; i++ ) {
                       if (isLeapYear(year2)) {
                         dayCount -= leapDays[i - 1];
                       } else {
@@ -270,7 +270,7 @@ public class CalendarStuff {
 
                     dayCount -= day2;
 
-                    for (long i = 0; i < month1; i++ ) {
+                    for (int i = 0; i < month1; i++ ) {
                       if (isLeapYear(year1)) {
                         dayCount += leapDays[i - 1];
                       } else {
