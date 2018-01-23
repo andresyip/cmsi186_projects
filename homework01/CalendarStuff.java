@@ -52,19 +52,11 @@ public class CalendarStuff {
    private static final int DECEMBER   = NOVEMBER  + 1;
 
   /**
-   * An array containing the number of days in each month
-   *  NOTE: this excludes leap years, so those will be handled as special cases
-   *  NOTE: this is optional, but suggested
+   * One array containing the number of days in each month for normal years
+   * One array containing the number of days in each month for leap years
    */
    private static final long[]    days        = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
    private static final long[]    leapDays    = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-
-  /**
-   * The constructor for the class
-   */
-   public CalendarStuff() {
-      System.out.println( "Constructor called..." );  // replace this with the actual code
-   }
 
   /**
    * A method to determine if the year argument is a leap year or not<br />
@@ -209,82 +201,70 @@ public class CalendarStuff {
    public static long daysBetween( long month1, long day1, long year1, long month2, long day2, long year2 ) {
       long dayCount = 0;
       if ( isValidDate (month1, day1, year1) && isValidDate(month2, day2, year2) ) {
-        switch( compareDate( month1, day1, year1, month2, day2, year2 ) ){
-          case -1:  if ( year1 == year2 ) {
-                       dayCount += 0;
-                    } else {
-                      for (int i = (int) year1; i < year2; i++) {
-                        if ( isLeapYear(i) ) {
-                          dayCount += 366;
-                        } else {
-                          dayCount += 365;
-                        }
-                      }
-                    }
-            
-                    if ( month1 == 1 ) {
-                      dayCount += 0;
-                    } else {
-                      for (int i = 0; i < (month1 - 1); i++ ) {
-                        if (isLeapYear(year1)) {
-                          dayCount -= leapDays[i];
-                        } else {
-                          dayCount -= days[i];
-                        } 
-                      }
-                    }
-
-                    dayCount -= day1;
-
-                    if ( month2 == 1 ) {
-                       dayCount += 0;
-                    } else {
-                        for (int i = 0; i < (month2 - 1); i++ ) {
-                          if (isLeapYear(year2)) {
-                             dayCount += leapDays[i];
-                          } else {
-                             dayCount += days[i];
-                          }
-                        }
-                    }
-              
-                    dayCount += day2;
-
-                    return dayCount;
+        switch( compareDate( month1, day1, year1, month2, day2, year2 ) ){ //Checks the order of dates entered.
           case  0:  return dayCount;
-          case +1:  for (int i = (int) year2; i < year1; i++) {
-                      if (isLeapYear(i)) {
+          case -1:  for (int i = (int) year1; i < year2; i++) {   //Counts number of days between years by adding number of days
+                      if ( isLeapYear(i) ) {                      //in each year between both years to dayCount
+                        dayCount += 366;
+                      } else {
+                        dayCount += 365;
+                      }
+                    }           
+                    
+                    for (int i = 0; i < (month1 - 1); i++ ) {     //Takes the number of days in each month passed from first date and
+                      if (isLeapYear(year1)) {                    //subtracts from dayCount.
+                        dayCount -= leapDays[i];
+                      } else {
+                        dayCount -= days[i];
+                      } 
+                    }
+                    
+                    dayCount -= day1;                             //Takes the number of days passed from first date and subtracts from dayCount
+                    
+                    for (int i = 0; i < (month2 - 1); i++ ) {     //Takes the number of days in months in each month passed from second date and
+                      if (isLeapYear(year2)) {                    //adds to dayCount
+                        dayCount += leapDays[i];
+                      } else {
+                        dayCount += days[i];
+                      }
+                    }
+                    
+                    dayCount += day2;                             //Takes the number of days passed from second date and adds to dayCount
+                    return dayCount;                              //Returns dayCount 
+
+          case +1:  for (int i = (int) year2; i < year1; i++) {   //Counts number of days between years by iterating through every year
+                      if (isLeapYear(i)) {                        //between both years and adding the number of days to dayCount
                         dayCount += 366;
                       } else {
                         dayCount += 365;
                       }
                     }
              
-                    for (int i = 0; i < month2; i++ ) {
-                      if (isLeapYear(year2)) {
+                    for (int i = 0; i < (month2 - 1); i++ ) {     //Takes the number of days in each month passed from first date and
+                      if (isLeapYear(year2)) {                    //subtracts from dayCount.
                         dayCount -= leapDays[i];
                       } else {
                         dayCount -= days[i];
                       }
                     }
+                    
+                    dayCount -= day2;                             //Takes the number of days passed from first date and subtracts from dayCount
 
-                    dayCount -= day2;
-
-                    for (int i = 0; i < month1; i++ ) {
-                      if (isLeapYear(year1)) {
+                    for (int i = 0; i < (month1 - 1); i++ ) {     //Takes the number of days in months in each month passed from second date and
+                      if (isLeapYear(year1)) {                    //adds to dayCount
                         dayCount += leapDays[i];
                       } else {
                         dayCount += days[i];
                       }
-                    }
-              
-                     dayCount += day1;
-
-                    return dayCount;
+                    }              
+                    
+                    dayCount += day1;                             //Takes the number of days passed from second date and adds to dayCount
+                    return dayCount;                              //Returns dayCount
           default: break;
         }
+      } else {
+        break;
       } 
-      return dayCount;
    }  
 
 }
