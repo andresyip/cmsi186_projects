@@ -161,19 +161,19 @@ public class CalendarStuff {
    * @return         String containing the string value of the month (no spaces)
    */
    public static String toMonthString( int month ) {
-      switch( month ) {
-         case  1: return "January";
-         case  2: return "February";
-         case  3: return "March";
-         case  4: return "April";
-         case  5: return "May";
-         case  6: return "June";
-         case  7: return "July";
-         case  8: return "August";
-         case  9: return "September";
-         case 10: return "October";
-         case 11: return "November";
-         case 12: return "December";
+      switch( month - 1 ) {
+         case  JANUARY  : return "January";
+         case  FEBRUARY : return "February";
+         case  MARCH    : return "March";
+         case  APRIL    : return "April";
+         case  MAY      : return "May";
+         case  JUNE     : return "June";
+         case  JULY     : return "July";
+         case  AUGUST   : return "August";
+         case  SEPTEMBER: return "September";
+         case  OCTOBER  : return "October";
+         case  NOVEMBER : return "November";
+         case  DECEMBER : return "December";
          default: throw new IllegalArgumentException( "Illegal month value given to 'toMonthString()'." );
       }
    }
@@ -184,14 +184,14 @@ public class CalendarStuff {
    * @return       String containing the string value of the day (no spaces)
    */
    public static String toDayOfWeekString( int day ) {
-      switch( day % 7 ) {
-         case  0: return "Saturday";
-         case  1: return "Sunday";
-         case  2: return "Monday";
-         case  3: return "Tuesday";
-         case  4: return "Wednesday";
-         case  5: return "Thursday";
-         case  6: return "Friday";
+      switch( day - 1 ) {
+         case  0: return "Sunday";
+         case  1: return "Monday";
+         case  2: return "Tuesday";
+         case  3: return "Wednesday";
+         case  4: return "Thursday";
+         case  5: return "Friday";
+         case  6: return "Saturday";
          default: throw new IllegalArgumentException( "Illegal day value given to 'toDayOfWeekString()'." );
       }
    }
