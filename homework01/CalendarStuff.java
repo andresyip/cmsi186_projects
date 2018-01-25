@@ -213,6 +213,7 @@ public class CalendarStuff {
           case  0:  return dayCount;
           case -1:  for (int i = (int) year1; i < year2; i++) {
                       if ( isLeapYear(i) ) {
+                        dayCount += 366;
                       } else {
                         dayCount += 365;
                       }
