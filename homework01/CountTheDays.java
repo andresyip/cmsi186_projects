@@ -226,7 +226,8 @@ public class CountTheDays {
             year2  = Long.parseLong( args[5] );
          }
          catch( Exception e ) { System.out.println( "\n\nEXCEPTION: " + e.toString() ); };
+         dayCount = daysBetween( month1, day1, year1, month2, day2, year2 );
          }
-         System.out.println("The days between are " + daysBetween( month1, day1, year1, month2, day2, year2 ) + ".");
+         System.out.println("The days between are " + dayCount + ".");
       }
 }
