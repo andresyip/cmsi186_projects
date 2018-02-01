@@ -1,8 +1,6 @@
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  File name     :  StringStuff.java
  *  Purpose       :  A file full of stuff to do with the Java String class
- *  Author        :  B.J. Johnson
- *  Date          :  2017-01-19
  *  Author        :  Andre Yip
  *  Date          :  01-26-18
  *  Description   :  This file presents a bunch of String-style helper methods.  Although pretty much
@@ -20,6 +18,7 @@
  *           -----  ----------  ------------  -----------------------------------------------------------
  *  @version 1.0.0  2017-01-19  B.J. Johnson  Initial writing and release
  *  @version 1.1.0  2017-01-22  B.J. Johnson  Fill in methods to make the program actually work
+ *  @version 2.0.0  2018-02-01  Andre Yip     Completing all method functions
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 import java.util.Set;
 import java.util.LinkedHashSet;
