@@ -270,6 +270,8 @@ public class CalendarStuff {
                     return dayCount; 
           default: break;
         }
+      } else {
+        throw new IllegalArgumentException("Please enter valid dates.");
       }
     return dayCount; 
    }  
