@@ -66,6 +66,16 @@ public class StringStuff {
             break;
          }
       }
+
+      if ( !output ) {
+         for ( int i = 0; i < s.length(); i++) {
+            if (checkChar(s.charAt(i), specialVowels) ) {
+               output = true;
+               break;
+            }
+         }
+      }
+
       return output;
    }
 
@@ -173,7 +183,8 @@ public class StringStuff {
    }
 
   /**
-   * Method to return the reverse of a string passed as an argument
+   * Method to return the reverse of a string passed as an argument. Iterates in reverse
+   * through input string and adding characters to new output string.
    *
    * @param s String containing the data to be reversed
    * @return  String containing the reverse of the input string
@@ -192,26 +203,15 @@ public class StringStuff {
    * @param args String array containing command line parameters
    */
    public static void main( String args[] ) {
-      String blah = new String( "Blah blah blah" );
-      String woof = new String( "BCDBCDBCDBCDBCD" );
-      String pal1 = new String( "a" );
-      String pal2 = new String( "ab" );
-      String pal3 = new String( "aba" );
-      String pal4 = new String( "amanaplanacanalpanama" );
-      String pal5 = new String( "abba" );
-      System.out.println( containsVowel( blah ) );
-      System.out.println( containsVowel( woof ) );
-      System.out.println( isPalindrome( pal1 ) );
-      System.out.println( isPalindrome( pal2 ) );
-      System.out.println( isPalindrome( pal3 ) );
-      System.out.println( isPalindrome( pal4 ) );
-      System.out.println( isPalindrome( pal5 ) );
-      System.out.println( "evensOnly()        returns: " + evensOnly( "REHEARSALSZ" ) );
-      System.out.println( "evensOnly()        returns: " + evensOnly( "REhearSALsz" ) );
-      System.out.println( "evensOnlyNoDupes() returns: " + evensOnlyNoDupes( "REhearSALsz" ) );
-      System.out.println( "oddsOnly()         returns: " + oddsOnly( "xylophones" ) );
-      System.out.println( "oddsOnly()         returns: " + oddsOnly( "XYloPHonES" ) );
-      System.out.println( "oddsOnlyNoDupes()  returns: " + oddsOnlyNoDupes( "XYloPHonES" ) );
-      System.out.println( "reverse()          returns: " + reverse( "REHEARSALSZ" ) );
+      String input = args[0];
+
+      System.out.println( containsVowel(input) ? "Does contain vowel." : "Does not contain vowel." );
+      System.out.println( isPalindrome(input) ? "Is palindrome." : "Is not palindrome.");
+      System.out.println( evensOnly(input) );
+      System.out.println( oddsOnly(input) );
+      System.out.println( evensOnlyNoDupes(input) );
+      System.out.println( oddsOnlyNoDupes(input) );
+      System.out.println( reverse(input) );
+
    }
 }
