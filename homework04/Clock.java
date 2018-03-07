@@ -1,8 +1,8 @@
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  File name     :  Clock.java
  *  Purpose       :  Provides a class defining methods for the ClockSolver class
- *  @author       :  B.J. Johnson
- *  Date written  :  2017-02-28
+ *  @author       :  Andre Yip
+ *  Date written  :  03/07/2018
  *  Description   :  This class provides a bunch of methods which may be useful for the ClockSolver class
  *                   for Homework 4, part 1.  Includes the following:
  *
@@ -14,7 +14,7 @@
  *  ---------------
  *            Rev      Date     Modified by:  Reason for change/modification
  *           -----  ----------  ------------  -----------------------------------------------------------
- *  @version 1.0.0  2017-02-28  B.J. Johnson  Initial writing and release
+ *  @version 1.0.0  03/07/2018  Andre Yip     Initial writing and release
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 public class Clock {
@@ -61,8 +61,8 @@ public class Clock {
    public double validateAngleArg( String argValue ) throws NumberFormatException {
       double argAngle = Double.parseDouble( argValue );
       
-      if ( argAngle > 360 ) {
-      	throw new IllegalArgumentException("Angle must be at less than or equal to 360.");
+      if ( argAngle > 360 || argAngle <= 0 ) {
+      	throw new IllegalArgumentException("Angle must be positive and less than or equal to 360.");
       }
       
       return argAngle;
@@ -83,7 +83,7 @@ public class Clock {
       double argTick = Double.parseDouble( argValue );
 
       if ( argTick <= 0 || argTick > 1800 ) {
-      	throw new IllegalArgumentException("Time slice must be less than or euqal to 1800.");
+      	throw new IllegalArgumentException("Time slice must be positive and less than or euqal to 1800.");
       }
 
       return argTick;

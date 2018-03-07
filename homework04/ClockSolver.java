@@ -2,8 +2,8 @@
  *  File name     :  ClockSolver.java
  *  Purpose       :  The main program for the ClockSolver class
  *  @see
- *  @author       :  B.J. Johnson
- *  Date written  :  2017-02-28
+ *  @author       :  Andre Yip
+ *  Date written  :  03/07/2018
  *  Description   :  This class provides a bunch of methods which may be useful for the ClockSolver class
  *                   for Homework 4, part 1.  Includes the following:
   *
@@ -15,8 +15,12 @@
  *  ---------------
  *            Rev      Date     Modified by:  Reason for change/modification
  *           -----  ----------  ------------  -----------------------------------------------------------
- *  @version 1.0.0  2017-02-28  B.J. Johnson  Initial writing and release
+ *  @version 1.0.0  03/07/2018  Andre Yip  Initial writing and release
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 
 public class ClockSolver {
   /**
@@ -47,10 +51,11 @@ public class ClockSolver {
       
       System.out.println( "\n   Welcome to the Clock Solver Program" ) ;
       if( 0 == args.length ) {
-         System.out.println( "\n   Please enter at least one argument." +
-                             "\n   The first number will be the angle to check." +
-                             "\n   The second number will be the slice of time the clock will tick." +
-                             "\n   The last number will be the window of error." +
+         System.out.println( "\n   You must at least the first argument." +
+                             "\n     The first number will be the reference angle." +
+                             "\n     The second number will be the slice of time the clock will tick." +
+                             "\n     The last number will be the range of degrees the angle may be from the refence angle." +
+                             "\n   If the process takes too long, enter q to quit." + 
                              "\n   Please try again. The program will now quit." );
          System.exit( 1 );
       }
@@ -78,6 +83,7 @@ public class ClockSolver {
    public static void main( String args[] ) {
       ClockSolver cse = new ClockSolver();
       cse.handleInitialArguments( args );
+
       Clock clock    = new Clock();
       double checkAngle = Double.parseDouble( args[0] );
       double range = 0.1;
@@ -86,20 +92,26 @@ public class ClockSolver {
       if (args.length > 1 ) {
       	clock.tick(args[1]);
       }	
+
       if (args.length == 3 ) {
       	range = Double.parseDouble( args[2] );
       }
+
      	System.out.println( "\nThe angle of the clock's hands is euqal to " + checkAngle + " when:");
       while( clock.time < 43200 ) {
-      	if ( Math.abs(clock.getHandAngle() - checkAngle) < range ) {
+        if ( Math.abs(clock.getHandAngle() - checkAngle) < range ) {
       		counter++;
-      		System.out.println( "  The clock is at " + clock.toString() );
+      		System.out.println( "  The time is " + clock.toString() );
       	}
 
       	clock.time += clock.tick;
       }
 
-      System.out.println( "For a total of " + counter + " times.");
+      if ( counter == 1 ) {
+        System.out.println( "For a total of " + counter + " time." );
+      } else {
+        System.out.println( "For a total of " + counter + " times.");
+      }
 
       System.exit( 0 );
    }
