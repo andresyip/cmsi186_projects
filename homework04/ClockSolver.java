@@ -97,7 +97,7 @@ public class ClockSolver {
       	range = Double.parseDouble( args[2] );
       }
 
-     	System.out.println( "\nThe angle of the clock's hands is euqal to " + checkAngle + " when:");
+     	System.out.println( "\nThe angle of the clock's hands is euqal to [" + checkAngle + "] when:");
       while( clock.time < 43200 ) {
         if ( Math.abs(clock.getHandAngle() - checkAngle) < range ) {
       		counter++;
