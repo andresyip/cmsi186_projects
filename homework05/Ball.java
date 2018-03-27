@@ -59,6 +59,7 @@ public class Ball {
    		throw new IllegalArgumentException("The second argument must be a number between -150 and 150.");
    	}
    }
+
    /**
     *  Methods to caclculate the new location based on vector and previous location after a tick.
    **/
@@ -88,12 +89,17 @@ public class Ball {
    	}
    	return this.vectorY;
    }
-
+   /**
+    *  Method to convert the information of the ball to a string.
+   **/
    public String toString() {
    	DecimalFormat df = new DecimalFormat("#.00");
    	return "(" + df.format(this.locationX) + "," + df.format(this.locationY) + ").";
    }
 
+   /**
+    *  Method to test that the object is working porperly.
+   **/
    public static void main( String[] args ) {
    	double time = 0;
    	Ball ball1 = new Ball();
@@ -115,6 +121,5 @@ public class Ball {
    	}
    	
    }
-
 
 }
