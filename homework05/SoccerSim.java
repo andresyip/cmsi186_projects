@@ -1,4 +1,5 @@
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class SoccerSim {
     
@@ -11,7 +12,8 @@ public class SoccerSim {
    	                       "\n     The third number will be the speed the ball moves in the x direction." +
    	                       "\n     The fourth number will be the speed the ball moves in the y direction." +
    	                       "\n     You may add a last number to change the time slice in seconds." +
-   	                       "\n   You may repeat for as many balls. Please try again. The program will now quit.");
+   	                       "\n   You may repeat for as many balls. Please try again. The program will now quit." +
+   	   						  "\n \n       P.S. There exists a pole at a new random location every game.");
    	   System.exit( 1 );
    	}
 
@@ -22,7 +24,7 @@ public class SoccerSim {
    	int numOfBalls = ( args.length - (args.length % 4) ) / 4;
    	double ballsOnField = numOfBalls;
 
-   	Ball[] balls = new Ball[numOfBalls];
+   	Ball[] balls = new Ball[numOfBalls + 1];
 
    	for ( int i = 0; i < numOfBalls; i++ ) {
    		balls[i] = new Ball();
@@ -31,6 +33,13 @@ public class SoccerSim {
    		balls[i].vectorX = Double.parseDouble( args[ i * 4 + 2] );
    		balls[i].vectorY = Double.parseDouble( args[ i * 4 + 3] );
    	}
+
+   	Ball pole = new Ball();
+   		pole.locationX = Math.ceil(Math.random() * 195);
+   		pole.locationY = Math.ceil(Math.random() * 150);
+   		pole.vectorX = pole.locationX;
+   		pole.vectorY = pole.locationY;
+   	balls[numOfBalls + 1] = pole;
 
    	System.out.println(" \n    You have entered " + numOfBalls + " balls.");
    	for (int i = 0; i < numOfBalls; i++) {
@@ -52,15 +61,21 @@ public class SoccerSim {
    			if( collision ) {
    				break;
    			}
-
+   			
    			if ( balls[i].checkOnField() ) {
-   				for ( int j = i + 1; j < numOfBalls; j++ ) {
+   				for ( int j = i + 1; j < numOfBalls + 1; j++ ) {
    					double distanceX = ( balls[i].locationX - balls[j].locationX ) * 12;
    					double distanceY = ( balls[i].locationY - balls[j].locationY ) * 12;
 
    					if ( Math.pow( distanceX, 2) + Math.pow( distanceY, 2)  <= Math.pow( balls[i].radius * 12 * 2, 2) ) {
-   						System.out.println( "\n    At " + time + " seconds, Ball#" + ( i + 1 ) + " collides Ball#" + ( j + 1 )+ " at " + balls[i].toString());
    						collision = true;
+   					}
+
+   					if ( collision == true && j == numOfBalls) {
+   						System.out.println( "\n    At " + time + " seconds, Ball#" + ( i + 1 ) + " collides with the pole at " + balls[i].toString());
+   						break;
+   					} else if ( collision == true ) {
+   						System.out.println( "\n    At " + time + " seconds, Ball#" + ( i + 1 ) + " collides with Ball#" + ( j + 1 )+ " at " + balls[i].toString());
    						break;
    					}
    				}
