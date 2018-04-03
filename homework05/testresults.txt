@@ -1,0 +1,188 @@
+.
+.
+======================================
+... Testing Ball class ...
+======================================
+.
+.
+.
+.
+======================================
+... Testing Timer class ...
+======================================
+.
+.
+======================================
+... Testing SoccerSim no args...
+======================================
+
+  Welcome to the Soccer Simulation Program.
+
+   You must enter at least four arguments per ball for at least 1 ball.
+     The first number will be the x coordinate of the ball.
+     The second number will be the y coordinate of the ball.
+     The third number will be the speed the ball moves in the x direction.
+     The fourth number will be the speed the ball moves in the y direction.
+     You may add a last number to change the time slice in seconds.
+   You may repeat for as many balls. Please try again. The program will now quit.
+
+       P.S. There exists a pole at a new random location every game.
+.
+.
+======================================
+... Testing SoccerSim one arg...
+======================================
+
+  Welcome to the Soccer Simulation Program.
+
+   You must enter at least four arguments per ball for at least 1 ball.
+     The first number will be the x coordinate of the ball.
+     The second number will be the y coordinate of the ball.
+     The third number will be the speed the ball moves in the x direction.
+     The fourth number will be the speed the ball moves in the y direction.
+     You may add a last number to change the time slice in seconds.
+   You may repeat for as many balls. Please try again. The program will now quit.
+
+       P.S. There exists a pole at a new random location every game.
+.
+.
+======================================
+... Testing SoccerSim two args...
+======================================
+
+  Welcome to the Soccer Simulation Program.
+
+   You must enter at least four arguments per ball for at least 1 ball.
+     The first number will be the x coordinate of the ball.
+     The second number will be the y coordinate of the ball.
+     The third number will be the speed the ball moves in the x direction.
+     The fourth number will be the speed the ball moves in the y direction.
+     You may add a last number to change the time slice in seconds.
+   You may repeat for as many balls. Please try again. The program will now quit.
+
+       P.S. There exists a pole at a new random location every game.
+.
+.
+======================================
+... Testing SoccerSim three args...
+======================================
+
+  Welcome to the Soccer Simulation Program.
+
+   You must enter at least four arguments per ball for at least 1 ball.
+     The first number will be the x coordinate of the ball.
+     The second number will be the y coordinate of the ball.
+     The third number will be the speed the ball moves in the x direction.
+     The fourth number will be the speed the ball moves in the y direction.
+     You may add a last number to change the time slice in seconds.
+   You may repeat for as many balls. Please try again. The program will now quit.
+
+       P.S. There exists a pole at a new random location every game.
+.
+.
+======================================
+... Testing SoccerSim six args...
+======================================
+
+  Welcome to the Soccer Simulation Program.
+Threw Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 2
+        at SoccerSim.main(SoccerSim.java:48)
+.
+.
+======================================
+... Testing SoccerSim out of bounds...
+======================================
+
+  Welcome to the Soccer Simulation Program.
+.
+.
+======================================
+... Testing SoccerSim negative time slice...
+======================================
+
+  Welcome to the Soccer Simulation Program.
+Threw Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 2
+        at SoccerSim.main(SoccerSim.java:48)
+.
+.
+======================================
+... Testing SoccerSim time slice too large...
+======================================
+
+  Welcome to the Soccer Simulation Program.
+Threw Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 2
+        at SoccerSim.main(SoccerSim.java:48)
+.
+.
+======================================
+... Testing SoccerSim time slice value of zero...
+======================================
+
+  Welcome to the Soccer Simulation Program.
+Threw Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 2
+        at SoccerSim.main(SoccerSim.java:48)
+.
+.
+======================================
+... Testing SoccerSim check for collision...
+======================================
+
+  Welcome to the Soccer Simulation Program.
+.
+Threw Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 3
+        at SoccerSim.main(SoccerSim.java:48)
+.
+======================================
+... Testing SoccerSim valid ball should come to rest...
+======================================
+
+  Welcome to the Soccer Simulation Program.
+Threw Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 2
+        at SoccerSim.main(SoccerSim.java:48)
+.
+.
+======================================
+... Testing SoccerSim valid ball should go out of bounds...
+======================================
+
+  Welcome to the Soccer Simulation Program.
+Threw Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 2
+        at SoccerSim.main(SoccerSim.java:48)
+.
+.
+======================================
+... Testing SoccerSim valid ball set six balls subsecond time slice...
+======================================
+
+  Welcome to the Soccer Simulation Program.
+Threw Exception in thread "main" java.lang.IllegalArgumentException: The first argument must be a number between -195 and 195.
+        at Ball.validateLocationXArg(Ball.java:50)
+        at SoccerSim.main(SoccerSim.java:34).
+Arguments were valid
+.
+.
+======================================
+... Testing SoccerSim valid ball set five balls 1.234 second time slice...
+======================================
+
+  Welcome to the Soccer Simulation Program.
+Threw Exception in thread "main" java.lang.IllegalArgumentException: The first argument must be a number between -195 and 195.
+        at Ball.validateLocationXArg(Ball.java:50)
+        at SoccerSim.main(SoccerSim.java:34).
+Arguments were valid
+.
+.
+======================================
+... Testing SoccerSim valid ball set ten balls 10 second time slice...
+======================================
+
+  Welcome to the Soccer Simulation Program.
+Threw Exception in thread "main" java.lang.IllegalArgumentException: The first argument must be a number between -195 and 195.
+        at Ball.validateLocationXArg(Ball.java:50)
+        at SoccerSim.main(SoccerSim.java:34).
+Arguments were valid
+.
+.
+======================================
+... End of SoccerSim Testing...
+======================================
