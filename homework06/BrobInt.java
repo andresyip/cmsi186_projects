@@ -146,7 +146,7 @@ public class BrobInt {
     BrobInt output = new BrobInt("0");
     int carry = 0;
 
-    if ( this.sign == 1 && gint.sign == 0 ) {
+    if ( this.sign == 0 && gint.sign == 1 ) {
       sub(gint);
     } else if ( this.sign > gint.sign ) {
       gint.sub(this);
@@ -156,7 +156,6 @@ public class BrobInt {
 
     if ( this.intVersion.length == gint.intVersion.length ) {
       output.intVersion = new int[this.intVersion.length];
-
       for ( int i = 0; i < intVersion.length; i++) {
         output.intVersion[i] = this.intVersion[i] + gint.intVersion[i] + carry;
         carry = 0;
@@ -167,7 +166,7 @@ public class BrobInt {
       }
 
       for ( int i = 0; i < output.intVersion.length; i++) {
-        if ( output.internalValue.length() < 8 ) {
+        if ( i == 0 ) {
           output.internalValue = Integer.toString( output.intVersion[i] );
         } else if ( output.intVersion[i] >= 10000000 || i == output.intVersion.length - 1) {
           output.internalValue = output.intVersion[i] + output.internalValue;
@@ -256,7 +255,7 @@ public class BrobInt {
       return output;
     }
 
-    throw new RuntimeException( "\n         Oops, something went wrong." );
+    throw new RuntimeException( "\n         Oops, something went wrong in adding." );
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -271,6 +270,7 @@ public class BrobInt {
       gint.sign = 0;
       add(gint);
     } else if ( gint.sign < this.sign ) {
+      this.sign = 0;
       add(gint);
     }
 
@@ -303,7 +303,6 @@ public class BrobInt {
 
               output.internalValue += "0";
             }
-            System.out.println(output.internalValue);
             output.internalValue += output.intVersion[i];
           }
         }
@@ -443,7 +442,7 @@ public class BrobInt {
       }
     }
 
-  throw new RuntimeException( "\n         Oops, something went wrong." );
+  throw new RuntimeException( "\n         Oops, something went wrong in subtracting." );
   }
 
 
@@ -499,7 +498,7 @@ public class BrobInt {
     }
 
 
-    throw new RuntimeException( "\n         Oops, something went wrong." );
+    throw new RuntimeException( "\n         Oops, something went wrong in multiplying." );
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -511,13 +510,37 @@ public class BrobInt {
     BrobInt output = new BrobInt( "0" );
     if ( gint.compareTo(ZERO) == 0 ) {
       throw new IllegalArgumentException("\n Please entere a valid divisor.");
-    } else if ( this.compareTo(ZERO) == 0 ) {
+    } else if ( this.compareTo(ZERO) == 0 || this.compareTo(gint) < 0) {
       return output;
     } else if ( this.compareTo(gint) == 0 ) {
       return output = new BrobInt( "1" );
     }
 
-      throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
+    int n = gint.valueLength;
+    BrobInt div = new BrobInt( this.internalValue.substring( 0, n) );
+    if ( div.compareTo(gint) == -1) {
+      div.internalValue = this.internalValue.substring( 0, n + 1);
+    }
+
+    while ( n < this.internalValue.length() ) {
+      while (div.compareTo(gint) == 1) {
+        div = div.sub(gint);
+        output = output.add( ONE );
+      }
+
+      n++;
+      
+      if ( n + 1 == this.internalValue.length() ) {
+        break;
+      }
+
+      BrobInt plus = new BrobInt( this.internalValue.substring(n -1, n) );
+      div = div.multiply( TEN );
+      output = output.multiply( TEN );
+      div = div.add(plus);
+    }
+
+   return output;
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -526,7 +549,9 @@ public class BrobInt {
    *  @return BrobInt that is the remainder of division of this BrobInt by the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public BrobInt remainder( BrobInt gint ) {
-      throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
+    BrobInt output = new BrobInt( "0" );
+    output = this.sub( gint.multiply(this.divide(gint)) );
+    return output;
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
