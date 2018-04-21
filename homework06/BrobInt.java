@@ -38,10 +38,10 @@ public class BrobInt {
 
   /// Some constants for other intrinsic data types
   ///  these can help speed up the math if they fit into the proper memory space
-   public static final BrobInt MAX_INT  = new BrobInt( new Integer( Integer.MAX_VALUE ).toString() );
-   public static final BrobInt MIN_INT  = new BrobInt( new Integer( Integer.MIN_VALUE ).toString() );
-   public static final BrobInt MAX_LONG = new BrobInt( new Long( Long.MAX_VALUE ).toString() );
-   public static final BrobInt MIN_LONG = new BrobInt( new Long( Long.MIN_VALUE ).toString() );
+   public static final BrobInt MAX_INT  = new BrobInt( Integer.valueOf( Integer.MAX_VALUE ).toString() );
+   public static final BrobInt MIN_INT  = new BrobInt( Integer.valueOf( Integer.MIN_VALUE ).toString() );
+   public static final BrobInt MAX_LONG = new BrobInt( Long.valueOf( Long.MAX_VALUE ).toString() );
+   public static final BrobInt MIN_LONG = new BrobInt( Long.valueOf( Long.MIN_VALUE ).toString() );
    public char[] NumChar = {'0','1','2','3','4','5','6','7','8','9'};
   /// These are the internal fields
    private String internalValue = "";        // internal String representation of this BrobInt
@@ -168,20 +168,15 @@ public class BrobInt {
       for ( int i = 0; i < output.intVersion.length; i++) {
         if ( i == 0 ) {
           output.internalValue = Integer.toString( output.intVersion[i] );
-        } else if ( output.intVersion[i] >= 10000000 || i == output.intVersion.length - 1) {
+        } else if ( output.intVersion[i] > 0 ) {
           output.internalValue = output.intVersion[i] + output.internalValue;
-        } else {
-          for ( int j = 0; j < 8 - Integer.toString(output.intVersion[i]).length(); i++ ) {
-            output.internalValue += 0;
-          }
-          output.internalValue += output.intVersion[i];
-        }
+        } 
       }
 
       return output;
     }
 
-    if (this.intVersion.length > gint.intVersion.length ) {
+    if (this.internalValue.length() > gint.internalValue.length() ) {
       output.intVersion = new int[this.intVersion.length];
 
       for ( int i = 0; i < gint.intVersion.length; i++) {
@@ -191,6 +186,7 @@ public class BrobInt {
           carry = output.intVersion[i] / 100000000;
           output.intVersion[i] = output.intVersion[i] % 100000000;
         } 
+
       }
 
       for ( int i = gint.intVersion.length; i < this.intVersion.length; i++ ) {
@@ -202,23 +198,20 @@ public class BrobInt {
         }
       }
 
+
       for ( int i = 0; i < output.intVersion.length; i++) {
-        if ( output.internalValue.length() < 8 ) {
+        if ( i == 0 ) {
           output.internalValue = Integer.toString( output.intVersion[i] );
-        } else if ( output.intVersion[i] >= 10000000 || i == output.intVersion.length - 1) {
+        } else if ( output.intVersion[i] > 0 ) {
           output.internalValue = output.intVersion[i] + output.internalValue;
-        } else {
-          for ( int j = 0; j < 8 - Integer.toString(output.intVersion[i]).length(); i++ ) {
-            output.internalValue += 0;
-          }
-          output.internalValue += output.intVersion[i];
-        }
+        } 
+
       }
 
-      return output;
+    return output;
     }
 
-    if (this.intVersion.length < gint.intVersion.length ) {
+    if (this.internalValue.length() < gint.internalValue.length() ) {
       output.intVersion = new int[gint.intVersion.length];
 
       for ( int i = 0; i < this.intVersion.length; i++) {
@@ -240,16 +233,11 @@ public class BrobInt {
       }
 
       for ( int i = 0; i < output.intVersion.length; i++) {
-        if ( output.internalValue.length() < 8 ) {
+        if ( i == 0 ) {
           output.internalValue = Integer.toString( output.intVersion[i] );
-        } else if ( output.intVersion[i] >= 10000000 || i == output.intVersion.length - 1) {
+        } else if ( output.intVersion[i] > 0 ) {
           output.internalValue = output.intVersion[i] + output.internalValue;
-        } else {
-          for ( int j = 0; j < 8 - Integer.toString(output.intVersion[i]).length(); i++ ) {
-            output.internalValue += 0;
-          }
-          output.internalValue += output.intVersion[i];
-        }
+        } 
       }
 
       return output;
@@ -294,17 +282,11 @@ public class BrobInt {
         }
 
         for ( int i = 0; i < output.intVersion.length; i++) {
-          if ( output.internalValue.length() < 8 ) {
+          if ( i == 0 ) {
             output.internalValue = Integer.toString( output.intVersion[i] );
-          } else if ( output.intVersion[i] >= 10000000 || i == output.intVersion.length - 1) {
+          } else if ( output.intVersion[i] > 0 ) {
             output.internalValue = output.intVersion[i] + output.internalValue;
-          } else {
-            for ( int j = 0; j < 8 - Integer.toString(output.intVersion[i]).length(); j++ ) {
-
-              output.internalValue += "0";
-            }
-            output.internalValue += output.intVersion[i];
-          }
+          } 
         }
 
         if ( output.sign == 1 ) {
@@ -331,16 +313,11 @@ public class BrobInt {
         }
 
         for ( int i = 0; i < output.intVersion.length; i++) {
-          if ( output.internalValue.length() < 8 ) {
+          if ( i == 0 ) {
             output.internalValue = Integer.toString( output.intVersion[i] );
-          } else if ( output.intVersion[i] >= 10000000 || i == output.intVersion.length - 1) {
+          } else if ( output.intVersion[i] > 0 ) {
             output.internalValue = output.intVersion[i] + output.internalValue;
-          } else {
-            for ( int j = 0; j < 8 - Integer.toString(output.intVersion[i]).length(); i++ ) {
-              output.internalValue += 0;
-            }
-            output.internalValue += output.intVersion[i];
-          }
+          } 
         }
 
         if ( output.sign == 1 ) {
@@ -378,16 +355,11 @@ public class BrobInt {
         }
 
         for ( int i = 0; i < output.intVersion.length; i++) {
-          if ( output.internalValue.length() < 8 ) {
+          if ( i == 0 ) {
             output.internalValue = Integer.toString( output.intVersion[i] );
-          } else if ( output.intVersion[i] >= 10000000 || i == output.intVersion.length - 1) {
+          } else if ( output.intVersion[i] > 0 ) {
             output.internalValue = output.intVersion[i] + output.internalValue;
-          } else {
-            for ( int j = 0; j < 8 - Integer.toString(output.intVersion[i]).length(); i++ ) {
-              output.internalValue += 0;
-            }
-            output.internalValue += output.intVersion[i];
-          }
+          } 
         }
 
         if ( output.sign == 1 ) {
@@ -423,16 +395,11 @@ public class BrobInt {
         }
 
         for ( int i = 0; i < output.intVersion.length; i++) {
-          if ( output.internalValue.length() < 8 ) {
+          if ( i == 0 ) {
             output.internalValue = Integer.toString( output.intVersion[i] );
-          } else if ( output.intVersion[i] >= 10000000 || i == output.intVersion.length - 1) {
+          } else if ( output.intVersion[i] > 0 ) {
             output.internalValue = output.intVersion[i] + output.internalValue;
-          } else {
-            for ( int j = 0; j < 8 - Integer.toString(output.intVersion[i]).length(); i++ ) {
-              output.internalValue += 0;
-            }
-            output.internalValue += output.intVersion[i];
-          }
+          } 
         }
 
         if ( output.sign == 1 ) {
@@ -441,6 +408,88 @@ public class BrobInt {
         return output;
       }
     }
+
+  if ( this.intVersion.length < gint.intVersion.length ) {
+    output.intVersion = new int[gint.intVersion.length];
+    if ( this.sign == 0 ) {
+      for ( int i = 0; i < this.intVersion.length; i++ ) {
+        output.intVersion[i] = gint.intVersion[i] - this.intVersion[i] + carry;
+        carry = 0;
+        if ( output.intVersion[i] < 0 ) {
+          output.intVersion[i] *= -1;
+          carry = -1;
+        }
+      }
+
+      for ( int i = this.intVersion.length; i < gint.intVersion.length; i++ ) {
+        output.intVersion[i] = gint.intVersion[i] + carry;
+        carry = 0;
+        if ( output.intVersion[i] < 0 ) {
+          output.intVersion[i] *= -1;
+          carry = -1;
+        }
+      }
+
+      if ( carry == -1 ) {
+        output.sign = 1;
+      } else {
+        output.sign = 0;
+      }
+
+      for ( int i = 0; i < output.intVersion.length; i++) {
+        if ( i == 0 ) {
+          output.internalValue = Integer.toString( output.intVersion[i] );
+        } else if ( output.intVersion[i] > 0 ) {
+          output.internalValue = output.intVersion[i] + output.internalValue;
+        } 
+      }
+
+      if ( output.sign == 1 ) {
+        output.internalValue = "-" + output.internalValue;
+      }
+
+      return output;
+    }
+
+    if ( this.sign == 1 ) {
+      for ( int i = 0; i < this.intVersion.length; i++ ) {
+        output.intVersion[i] = this.intVersion[i] - gint.intVersion[i] + carry;
+        carry = 0;
+        if ( output.intVersion[i] < 0 ) {
+          output.intVersion[i] *= -1;
+          carry = -1;
+        }
+      }
+
+      for ( int i = this.intVersion.length; i < gint.intVersion.length; i++ ) {
+        output.intVersion[i] = - gint.intVersion[i] + carry;
+        carry = 0;
+        if ( output.intVersion[i] < 0 ) {
+          output.intVersion[i] *= -1;
+          carry = -1;
+        }
+      }
+
+      if ( carry == -1 ) {
+        output.sign = 0;
+      } else {
+        output.sign = 1;
+      }
+
+      for ( int i = 0; i < output.intVersion.length; i++) {
+        if ( i == 0 ) {
+          output.internalValue = Integer.toString( output.intVersion[i] );
+        } else if ( output.intVersion[i] > 0 ) {
+          output.internalValue = output.intVersion[i] + output.internalValue;
+        } 
+      }
+
+      if ( output.sign == 1 ) {
+        output.internalValue = "-" + output.internalValue;
+      }
+      return output;
+    }
+  }
 
   throw new RuntimeException( "\n         Oops, something went wrong in subtracting." );
   }
@@ -464,9 +513,12 @@ public class BrobInt {
     output.intVersion = new int[ this.intVersion.length + gint.intVersion.length + 1];
     for ( int i = 0; i < output.intVersion.length; i++ ) {
       output.intVersion[i] = 0;
+      System.out.println( i + "check: " + output.intVersion[i]);
     }
+    System.out.println( "checka: " + output.internalValue);
     for ( int i = 0; i < this.intVersion.length; i++ ) {
       for ( int j = 0; j < gint.intVersion.length; j++) {
+        System.out.println( i + j + " check: " + output.internalValue);
         output.intVersion[ i + j ] += ( (this.intVersion[i] * gint.intVersion[i]) + carry );
         carry = 0;
         if ( output.intVersion[ i + j ] < 0 ) {
@@ -478,18 +530,15 @@ public class BrobInt {
         }
       }
     }
-
+    System.out.println( "checkb: " + output.internalValue);
     for ( int i = 0; i < output.intVersion.length; i++) {
-      if ( output.internalValue.length() < 8 ) {
+      if ( i == 0 ) {
         output.internalValue = Integer.toString( output.intVersion[i] );
-      } else if ( output.intVersion[i] >= 10000000 || i == output.intVersion.length - 1) {
+      } else if ( output.intVersion[i] > 0 ) {
         output.internalValue = output.intVersion[i] + output.internalValue;
-      } else {
-        for ( int j = 0; j < 8 - Integer.toString(output.intVersion[i]).length(); i++ ) {
-          output.internalValue += 0;
-        }
-        output.internalValue += output.intVersion[i];
-      }
+      } 
+
+    System.out.println( "checkc: " + output.internalValue);
 
     if ( output.sign == 1 ) {
       output.internalValue = "-" + output.internalValue;
@@ -523,21 +572,31 @@ public class BrobInt {
     }
 
     while ( n < this.internalValue.length() ) {
+      System.out.println( "check. " + n);
+      System.out.println( "check1. " + this.internalValue.length());
       while (div.compareTo(gint) == 1) {
+
         div = div.sub(gint);
         output = output.add( ONE );
       }
 
-      n++;
-      
-      if ( n + 1 == this.internalValue.length() ) {
+      if ( n == this.internalValue.length() ) {
         break;
       }
 
+      n++;
+
       BrobInt plus = new BrobInt( this.internalValue.substring(n -1, n) );
       div = div.multiply( TEN );
+
+      System.out.println( "3a. " + div.internalValue);
+      System.out.println( "3b. " + output.internalValue);
+
       output = output.multiply( TEN );
       div = div.add(plus);
+
+      System.out.println( "4a. " + div.internalValue);
+      System.out.println( "4b. " + output.internalValue);
     }
 
    return output;
@@ -562,22 +621,29 @@ public class BrobInt {
    *        THAT was easy.....
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public int compareTo( BrobInt gint ) {
-    if( internalValue.length() > gint.internalValue.length() ) {
-      return 1;
-    } else if( internalValue.length() < gint.internalValue.length() ) {
-      return (-1);
-    } else {
-      for( int i = 0; i < internalValue.length(); i++ ) {
-         Character a = new Character( internalValue.charAt(i) );
-         Character b = new Character( gint.internalValue.charAt(i) );
-         if( new Character(a).compareTo( new Character(b) ) > 0 ) {
-            return 1;
-         } else if( new Character(a).compareTo( new Character(b) ) < 0 ) {
-            return (-1);
+     if( 1 == sign && 0 == gint.sign ) {
+         return -1;
+      } else if( 0 == sign && 1 == gint.sign ) {
+         return 1;
+      }
+
+      if( internalValue.length() > gint.internalValue.length() ) {
+         return 1;
+      } else if( internalValue.length() < gint.internalValue.length() ) {
+         return (-1);
+
+      } else {
+         for( int i = 0; i < internalValue.length(); i++ ) {
+            Character a = Character.valueOf( internalValue.charAt(i) );
+            Character b = Character.valueOf( gint.internalValue.charAt(i) );
+            if( Character.valueOf(a).compareTo( Character.valueOf(b) ) > 0 ) {
+               return 1;
+            } else if( Character.valueOf(a).compareTo( Character.valueOf(b) ) < 0 ) {
+               return (-1);
+            }
          }
       }
-   }
-   return 0;
+      return 0;
 }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -599,7 +665,7 @@ public class BrobInt {
    public static BrobInt valueOf( long value ) throws NumberFormatException {
       BrobInt gi = null;
       try {
-         gi = new BrobInt( new Long( value ).toString() );
+         gi = new BrobInt( Long.valueOf( value ).toString() );
       }
       catch( NumberFormatException nfe ) {
          System.out.println( "\n  Sorry, the value must be numeric of type long." );
