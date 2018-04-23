@@ -513,12 +513,9 @@ public class BrobInt {
     output.intVersion = new int[ this.intVersion.length + gint.intVersion.length + 1];
     for ( int i = 0; i < output.intVersion.length; i++ ) {
       output.intVersion[i] = 0;
-      System.out.println( i + "check: " + output.intVersion[i]);
     }
-    System.out.println( "checka: " + output.internalValue);
     for ( int i = 0; i < this.intVersion.length; i++ ) {
       for ( int j = 0; j < gint.intVersion.length; j++) {
-        System.out.println( i + j + " check: " + output.internalValue);
         output.intVersion[ i + j ] += ( (this.intVersion[i] * gint.intVersion[i]) + carry );
         carry = 0;
         if ( output.intVersion[ i + j ] < 0 ) {
@@ -530,15 +527,12 @@ public class BrobInt {
         }
       }
     }
-    System.out.println( "checkb: " + output.internalValue);
     for ( int i = 0; i < output.intVersion.length; i++) {
       if ( i == 0 ) {
         output.internalValue = Integer.toString( output.intVersion[i] );
       } else if ( output.intVersion[i] > 0 ) {
         output.internalValue = output.intVersion[i] + output.internalValue;
       } 
-
-    System.out.println( "checkc: " + output.internalValue);
 
     if ( output.sign == 1 ) {
       output.internalValue = "-" + output.internalValue;
@@ -572,8 +566,6 @@ public class BrobInt {
     }
 
     while ( n < this.internalValue.length() ) {
-      System.out.println( "check. " + n);
-      System.out.println( "check1. " + this.internalValue.length());
       while (div.compareTo(gint) == 1) {
 
         div = div.sub(gint);
@@ -589,14 +581,8 @@ public class BrobInt {
       BrobInt plus = new BrobInt( this.internalValue.substring(n -1, n) );
       div = div.multiply( TEN );
 
-      System.out.println( "3a. " + div.internalValue);
-      System.out.println( "3b. " + output.internalValue);
-
       output = output.multiply( TEN );
       div = div.add(plus);
-
-      System.out.println( "4a. " + div.internalValue);
-      System.out.println( "4b. " + output.internalValue);
     }
 
    return output;
